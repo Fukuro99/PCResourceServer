@@ -27,6 +27,9 @@ def get_resource():
     mem = psutil.virtual_memory().percent
     cpu = psutil.cpu_percent(interval=1)
     gpu_info = get_gpu_info()
-    gpu_mem = gpu_info[0]["memory.used"]
+    gpu_mem = int(gpu_info[0]["memory.used"])/int(gpu_info[0]["memory.total"])
     gpu_temp = gpu_info[0]["temperature.gpu"]
     return f"cpu:{cpu},mem:{mem},gpu_mem:{gpu_mem},gpu_temp:{gpu_temp}"
+
+if __name__ == "__main__":
+    print(get_resource())
